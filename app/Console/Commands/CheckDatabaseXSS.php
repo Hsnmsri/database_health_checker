@@ -67,7 +67,7 @@ class CheckDatabaseXSS extends Command
                     // on data fields
                     foreach ($d_value as $df_key => $df_value) {
                         if ($this->containsXSSPatterns($df_value)) {
-                            $this->error("[id : " . $d_value->id . "]");
+                            $this->error("[id : " . isset($d_value->id) ? $d_value->id : "W ID" . "]");
                             $this->warn($df_key . "=>" . $df_value);
                         }
                     }

@@ -85,6 +85,7 @@ class CheckDatabaseXSS extends Command
 
                 // increase limit
                 $offset += $limit;
+                $hasProblem = false;
             }
         }
 

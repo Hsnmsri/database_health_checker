@@ -43,7 +43,6 @@ class CheckDatabaseXSS extends Command
             }
 
             // print table name
-            $this->newLine();
             $this->info($value);
 
             $table = $value;
@@ -62,14 +61,25 @@ class CheckDatabaseXSS extends Command
                     break;
                 }
 
-                // on data
+                // on data records
+                $hasProblem = false;
                 foreach ($data as $d_key => $d_value) {
                     // on data fields
                     foreach ($d_value as $df_key => $df_value) {
                         if ($this->containsXSSPatterns($df_value)) {
-                            $this->error("[id : " . isset($d_value->id) ? $d_value->id : "W ID" . "]");
+                            $hasProblem = true;
                             $this->warn($df_key . "=>" . $df_value);
                         }
+                    }
+
+                    // has problem
+                    if ($hasProblem) {
+                        if (property_exists($d_value, 'id')) {
+                            $this->error("[id] : " . $d_value->id);
+                        } else {
+                            print_r($d_value);
+                        }
+                        $this->newLine();
                     }
                 }
 

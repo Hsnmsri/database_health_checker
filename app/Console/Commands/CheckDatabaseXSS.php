@@ -116,13 +116,11 @@ class CheckDatabaseXSS extends Command
         $patterns = [
             '/<script\b[^>]*>(.*?)<\/script>/is',
             '/<iframe\b[^>]*>(.*?)<\/iframe>/is',
-            '/<img\b[^>]*>/is',
             '/<object\b[^>]*>/is',
             '/<embed\b[^>]*>/is',
             '/<form\b[^>]*>/is',
             '/<input\b[^>]*>/is',
             '/<textarea\b[^>]*>/is',
-            '/<button\b[^>]*>/is'
         ];
 
         // Check each pattern against the input
